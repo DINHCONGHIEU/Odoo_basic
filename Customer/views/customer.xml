@@ -1,0 +1,156 @@
+
+<odoo>
+	<data>
+		<!-- Tree view -->
+		<record id="customer_view_tree" model="ir.ui.view">
+			<field name="name">Customer.tree</field>
+			<field name="model">customer</field>
+			<field name="arch" type="xml">
+				<tree string="customer Tree" limit="8">
+					<header>
+						<button string='Upper Name' type="object"
+							name='browse_name_upper' class='oe_highlight' />
+						<button string='Fix Name' type="object"
+							name='filtered_name_title' class='oe_link' />
+						<button string='Calculate product' type="object"
+							name='mapped_calculate_product_amount' class='oe_highlight' />
+						<button string="Remove" type="object" class="oe_link"
+							name="unlink" />
+						<button string="Website" type="object" class="oe_highlight"
+							name="action_url" />
+					</header>
+					<field name="name" />
+					<field name="birthday" />
+					<!-- <field name="birthday" groups="Customer.group_admin"/> -->
+					<field name="address" />
+					<field name="gender" decoration-success="gender" />
+					<field name="number" widget="phone" />
+					<field name="product" />
+					<field name="amount" />
+					<field name="currency_id" invisible="1" />
+					<field name="total_price" />
+					<button string='Buy' type="object" name='create_order'
+						class='oe_highlight' />
+					<button string="Increase" type="object" class="oe_highlight"
+						name="write_record_increase" />
+					<button string="Reduce" type="object" class="oe_highlight"
+						name="write_record_reduce" />
+					<button string="Copy" type="object" class="oe_highlight"
+						name="copy_record" />
+					<button string="Remove" type="object" class="oe_highlight"
+						name="unlink" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form view -->
+		<record id="customer_view_form" model="ir.ui.view">
+			<field name="name">Customer.form</field>
+			<field name="model">customer</field>
+			<field name="arch" type="xml">
+				<form string="customer Form">
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button class="oe_stat_button" type="object"
+								string="Appointments" name="show_appointments"
+								icon="fa-pencil-square-o"/>
+							<button class="oe_stat_button"
+								name="button_journal_entries" string="Journal Entries"
+								type="object" icon="fa-bars" />
+						</div>
+						<div class="oe_title">
+							<label for="name" />
+							<h1>
+								<field name="name" placeholder="Your name..." />
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="birthday" />
+								<field name="age" />
+								<field name="address" />
+							</group>
+							<group>
+								<field name="gender" />
+								<field name="number" widget="phone" />
+							</group>
+						</group>
+						<group>
+							<field name="product" />
+							<field name="amount"
+								attrs="{'readonly':[('product','=',False)]}" />
+							<field name="currency_id" invisible="1" />
+							<field name="categories_money" />
+							<field name="total_price" />
+							<field name="priority" widget="priority" />
+						</group>
+						<notebook>
+							<page string="Product Details">
+								<group>
+									<field name="product1" />
+								</group>
+							</page>
+							<page string="More Information">
+								<group>
+									<field name="email_customer" widget="email" />
+								</group>
+							</page>
+<!-- 							<page string="Chatt">
+								<group>
+									<div class="oe_chatter">
+										<field name="message_follower_ids"
+											groups="base.group_user" />
+										<field name="activity_ids" />
+										<field name="message_ids" />
+									</div>
+								</group>
+							</page> -->
+						</notebook>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Search view -->
+		<record id="customer_search" model="ir.ui.view">
+			<field name="name">Customer.form</field>
+			<field name="model">customer</field>
+			<field name="arch" type="xml">
+				<search string="customer Search">
+					<field name="name" />
+					<field name="address" />
+					<field name="number" />
+					<filter string="Price > 15000000" name="price"
+						domain="[('total_price', '>',15000000 )]" />
+					<filter string="Birthday" name="name" domain="[]"
+						context="{'group_by':'birthday'}" />
+					<filter string="Address" name="name" domain="[]"
+						context="{'group_by':'address'}" />
+				</search>
+			</field>
+		</record>
+
+		<!-- action url -->
+		<record id="action_website" model="ir.actions.act_url">
+			<field name="name">Website</field>
+			<field name="url">https://www.google.com/</field>
+			<field name="target">new</field>
+		</record>
+
+		<!-- actions window -->
+		<record id="customer_action" model="ir.actions.act_window">
+			<field name="name">Customer</field>
+			<field name="res_model">customer</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+		<!-- menuitem -->
+		<menuitem id="customer_menu" name="Mobile" />
+
+		<menuitem id="customers_menu_1" name="Customer"
+			parent="customer_menu" action="customer_action" />
+
+		<menuitem id="Website" name="Website" parent="customer_menu"
+			action="action_website" />
+	</data>
+</odoo>

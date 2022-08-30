@@ -1,0 +1,74 @@
+<odoo>
+	<data>
+		<record id="one" model="ir.ui.view">
+			<field name="name">Test</field>
+			<field name="model">test</field>
+			<field name="arch" type="xml">
+				<tree string="test11">
+					<header>
+						<button string='check' type="object" name='check'
+							class='oe_highlight' />
+					</header>
+					<field name="name" />
+					<field name="nums" sum="sum nums" />
+
+					<field name="unit_price" />
+					<field name="unit_price" />
+					<field name="nums_related" />
+					<field name="related_select" />
+					<field name="introduce_yourself" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="two" model="ir.ui.view">
+			<field name="name">test.form</field>
+			<field name="model">test</field>
+			<field name="arch" type="xml">
+				<form string="test">
+					<button name="button_in_progress" class="oe_highlight"
+						states="draft" string="In Progress" type="object"
+						help="Move Appointment to In Progress state" />
+					<field name="state" widget="statusbar"
+						statusbar_visible="draft,in_progress,done" />
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button class="oe_stat_button" type="object"
+								string="Appointments" name="show_appointments"
+								icon="fa-pencil-square-o">
+							</button>
+							<button class="oe_stat_button"
+								name="button_journal_entries" string="Journal Entries"
+								type="object" icon="fa-bars" />
+						</div>
+						<group>
+							<field name="name" />
+							<field name="nums" context="{'default_nums':8}" />
+							<field name="unit_price" />
+							<field name="all_price" />
+							<field name="nums_related" />
+							<field name="related_select" />
+							<field name="introduce_yourself" />
+						</group>
+<!-- 						<group>
+							<div class="oe_chatter">
+								<field name="message_follower_ids"
+									groups="base.group_user" />
+								<field name="activity_ids" />
+								<field name="message_ids" />
+							</div>
+						</group> -->
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="three" model="ir.actions.act_window">
+			<field name="name">test</field>
+			<field name="res_model">test</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem id="menu" name="Test" />
+		<menuitem id="menu1" name="test" action="three" parent="menu" />
+	</data>
+</odoo>

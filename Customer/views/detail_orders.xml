@@ -1,0 +1,56 @@
+
+<odoo>
+	<data>
+		<!-- Tree view -->
+		<record id="detail_orders_view_tree" model="ir.ui.view">
+			<field name="name">detail orders.tree</field>
+			<field name="model">detail.orders</field>
+			<field name="inherit_id" ref="Customer.order_view_tree" />
+			<field name="mode">primary</field>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='name']" position="after">
+					<field name="address" />
+					<field name="number" />
+				</xpath>
+			</field>
+		</record>
+
+ 		
+<!-- Form view -->
+		<record id="detail_orders_view_form" model="ir.ui.view">
+			<field name="name">detail orders.form</field>
+			<field name="model">detail.orders</field>
+			<field name="inherit_id" ref="Customer.order_view_form" />
+			<field name="mode">primary</field>
+			<field name="arch" type="xml">
+				<xpath expr="//form//sheet//group//field[@name='name']" position="after">
+					<field name="address" />
+					<field name="number" />
+				</xpath>
+			</field>
+		</record>
+
+<!-- Search view -->
+		<record id="detail_orders_search" model="ir.ui.view">
+			<field name="name">detail orders.form</field>
+			<field name="model">detail.orders</field>
+			<field name="arch" type="xml">
+				<search string="order Search">
+					<field name="name" />
+					<field name="address" />
+				</search>
+			</field>
+		</record>
+
+<!-- actions -->
+		<record id="detail_orders_action" model="ir.actions.act_window">
+			<field name="name">detail order</field>
+			<field name="res_model">detail.orders</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+		<menuitem id="detail_orders_menu" name="Orders"
+			parent="customer_menu" action="detail_orders_action" />
+
+	</data>
+</odoo>

@@ -1,0 +1,64 @@
+
+<odoo>
+	<data>
+		<!-- Tree view -->
+		<record id="order_view_tree" model="ir.ui.view">
+			<field name="name">orders.tree</field>
+			<field name="model">orders</field>
+			<field name="arch" type="xml">
+				<tree string="order Tree" create="0">
+					<field name="name" />
+					<field name="product" />
+					<field name="amount" />
+					<field name="currency_id" invisible="1" />
+					<field name="total_price" />
+					<button string="Remove" type="object" class="oe_highlight"
+						name="unlink" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Form view -->
+		<record id="order_view_form" model="ir.ui.view">
+			<field name="name">orders.form</field>
+			<field name="model">orders</field>
+			<field name="arch" type="xml">
+				<form string="order Form" create="0" edit="0">
+					<sheet>
+						<group>
+							<field name="name" />
+						</group>
+						<group>
+							<field name="product" />
+							<field name="amount" />
+							<field name="total_price" />
+						</group>
+
+						<field name="currency_id" invisible="1" />
+
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Search view -->
+		<record id="order_search" model="ir.ui.view">
+			<field name="name">orders.search</field>
+			<field name="model">orders</field>
+			<field name="arch" type="xml">
+				<search string="order Search">
+					<field name="name" />
+				</search>
+			</field>
+		</record>
+
+		<!-- actions -->
+		<record id="order_action" model="ir.actions.act_window">
+			<field name="name">orders</field>
+			<field name="res_model">orders</field>
+			<field name="view_mode">tree,form,search</field>
+		</record>
+
+
+	</data>
+</odoo>

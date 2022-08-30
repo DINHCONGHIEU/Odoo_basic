@@ -1,0 +1,94 @@
+<odoo>
+	<data>
+		<!-- Tree view -->
+		<record id="employee_view_calender_tree" model="ir.ui.view">
+			<field name="name">Schedule.tree</field>
+			<field name="model">schedule</field>
+			<field name="arch" type="xml">
+				<tree string="Schedule Tree">
+					<field name="name" />
+					<field name="number" />
+					<field name="shift" />
+					<field name="start" widget="date" />
+					<field name="stop" widget="date" />
+					<field name="reason" />
+				</tree>
+			</field>
+		</record>
+
+		<!-- Calendar view -->
+		<record id="employee_view_calendar" model="ir.ui.view">
+			<field name="name">Schedule.calendar</field>
+			<field name="model">schedule</field>
+			<field name="arch" type="xml">
+				<calendar string="Schedule" date_start="start" color="name"
+					date_stop="stop" quick_add="False" mode="week">
+					<field name="shift" />
+					<field name="name" filters="1" avatar_field="image" />
+					<field name="number" />
+					<field name="reason" />
+				</calendar>
+			</field>
+		</record>
+
+		<!-- Form view -->
+		<record id="employee_schedule_view_form" model="ir.ui.view">
+			<field name="name">Schedule.form</field>
+			<field name="model">schedule</field>
+			<field name="arch" type="xml">
+				<form string="Schedule Form">
+					<sheet>
+						<div class="oe_title">
+							<label for="name"></label>
+							<h1>
+								<field name="name" placeholder="Your name..." />
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="number" />
+								<field name="shift" />
+								<field name="start" widget="date" />
+								<field name="stop" widget="date" />
+							</group>
+							<group>
+								<field name="time_start" widget="float_time"
+									attrs="{'invisible':[('shift','!=','shift_3')]}" />
+								<field name="time_stop" widget="float_time"
+									attrs="{'invisible':[('shift','!=','shift_3')]}" />
+							</group>
+							<group>
+								<field name="reason" placeholder="..." />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Search view -->
+		<record id="schedule_search" model="ir.ui.view">
+			<field name="name">Schedule</field>
+			<field name="model">schedule</field>
+			<field name="arch" type="xml">
+				<search string="Schedule search">
+					<group expand="1" string="Group By">
+						<filter string="Participants" name="name"
+							context="{'group_by':'name'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<!-- Action -->
+		<record id="employee_schedule_action"
+			model="ir.actions.act_window">
+			<field name="name">Schedule</field>
+			<field name="res_model">schedule</field>
+			<field name="view_mode">calendar,tree,form</field>
+		</record>
+
+		<menuitem id="schedule_menu" name="Schedule"
+			parent="employee" action="employee_schedule_action" sequence="3" />
+	</data>
+</odoo>

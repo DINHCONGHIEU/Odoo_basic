@@ -1,0 +1,47 @@
+<odoo>
+	<data>
+		<record id="one1" model="ir.ui.view">
+			<field name="name">test2</field>
+			<field name="model">test2</field>
+			<field name="arch" type="xml">
+				<tree>
+					<!-- <header>
+						<button string='check' type="object" name='check'
+							class='oe_highlight' />
+					</header> -->
+					<field name="name" />
+					<field name="test2_id" />
+					<field name="employee_id" />
+					<field name="employee_id_2" />
+
+				</tree>
+			</field>
+		</record>
+
+		<record id="two1" model="ir.ui.view">
+			<field name="name">test2.form</field>
+			<field name="model">test2</field>
+			<field name="arch" type="xml">
+				<form>
+					<sheet>
+						<group>
+							<field name="name" />
+							<field name="test2_id" />
+							<field name="employee_id" />
+							<field name="employee_id_2" />
+
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="three1" model="ir.actions.act_window">
+			<field name="name">test2</field>
+			<field name="res_model">test2</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem id="menu2" parent="menu" name="test 1"
+			action="three1" />
+	</data>
+</odoo>

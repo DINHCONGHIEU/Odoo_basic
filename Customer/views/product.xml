@@ -1,0 +1,167 @@
+
+<odoo>
+	<data>
+		<!-- Tree view -->
+		<record id="product_view_tree" model="ir.ui.view">
+			<field name="name">Product.tree</field>
+			<field name="model">product</field>
+			<field name="arch" type="xml">
+				<tree string="product Tree">
+					<header>
+						<button string="Check" type="object" class="oe_highlight"
+							name="check" />
+					</header>
+					<field name="image" class="oe_avatar" widget="image"
+						width="50px" />
+					<field name="name" />
+					<field name="manufacturer" />
+					<field name="currency_id" invisible="1" />
+					<field name="price" />
+					<field name="promotion" />
+					<field name="old_price"
+						attrs="{'invisible':[('promotion','=',False)],
+																'readonly':[('promotion','=',False)]}" />
+					<field name="amount" />
+					<field name="priority" widget="priority" readonly="True" />
+					<button icon="fa-cart-plus" type="object" name="buy" />
+				</tree>
+			</field>
+		</record>
+
+
+		<!-- Kanban view -->
+		<record id="product_kanban_view" model="ir.ui.view">
+			<field name="name">Product.kanban</field>
+			<field name="model">product</field>
+			<field name="arch" type="xml">
+				<kanban class="product_kanban">
+					<field name="name" />
+					<field name="manufacturer" />
+					<field name="currency_id" invisible="1" />
+					<field name="price" />
+					<field name="promotion" />
+					<field name="old_price" />
+					<field name="amount" />
+					<field name="image" />
+					<field name="evaluate" />
+					<templates>
+						<t t-name="kanban-box">
+							<div t-attf-class="oe_kanban_global_click">
+								<div class="oe_kanban_details row"
+									style="width:320px; height:120px;">
+									<div class="col-md-4" style="height:100%;">
+										<field name="image" widget="image"
+											class='oe_right oe_avatar' />
+									</div>
+									<div class="col-md-8" style="font-size:15px;">
+										<div style="height:43px;">
+											<strong>
+												<field name="name" />
+											</strong>
+										</div>
+										<div>
+											<ul>
+												<li>
+													Manufacturer:
+													<field name="manufacturer" />
+												</li>
+												<li>
+													Price:
+													<field name="price" />
+												</li>
+												<li>
+													<del>
+														<field name="old_price"
+															attrs="{'invisible':[('promotion','=',False)],
+																'readonly':[('promotion','=',False)]}" />
+													</del>
+												</li>
+												<li>
+													<field name="priority" widget="priority"
+														readonly="True" />
+													<p style="padding-left:8px; display:inline-block;">
+														<field name="evaluate" />
+														Ratings
+													</p>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+		<!-- Form view -->
+		<record id="product_view_form" model="ir.ui.view">
+			<field name="name">Product.form</field>
+			<field name="model">product</field>
+			<field name="arch" type="xml">
+				<form string="product Form">
+					<header>
+						<button string="Buy" type="object" class="oe_highlight"
+							name="buy" />
+					</header>
+					<sheet>
+						<div class="oe_image" style="padding-right:70px">
+							<field name="image" class="oe_avatar" widget="image" />
+						</div>
+						<div class="oe_title">
+							<label for="name"></label>
+							<h1>
+								<field name="name" />
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="manufacturer" />
+								<field name="currency_id" />
+								<field name="price" />
+								<field name="promotion" />
+								<field name="old_price" />
+							</group>
+							<group>
+								<field name="stocking" />
+								<field name="amount"
+									attrs="{'readonly':[('stocking','=',False)]}" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<!-- Search view -->
+		<record id="product_search" model="ir.ui.view">
+			<field name="name">Product.form</field>
+			<field name="model">product</field>
+			<field name="arch" type="xml">
+				<search string="product Search">
+					<field name="name" />
+					<field name="manufacturer" />
+				</search>
+			</field>
+		</record>
+
+		<!-- actions -->
+		<record id="product_action" model="ir.actions.act_window">
+			<field name="name">Product</field>
+			<field name="res_model">product</field>
+			<field name="view_mode">kanban,tree,form,search</field>
+		</record>
+
+		<!-- menuitem -->
+		<!-- <menuitem id="product_menu" name="Product" parent="customer_menu" 
+			action="product_action" sequence="1" /> -->
+
+		<record id="menu_human_readable_name" model="ir.ui.menu">
+			<field name="name">Product</field>
+			<field name="sequence" eval="1" />
+			<field name="action" ref="product_action" />
+			<field name="parent_id" ref="customer_menu" />
+		</record>
+
+	</data>
+</odoo>
